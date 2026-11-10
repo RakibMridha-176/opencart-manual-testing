@@ -1,0 +1,49 @@
+TC_ID,Module,REQ_ID,Title,Precondition,Steps,Test Data,Expected Result,Actual Result,Status,Bug_ID,Tested On,Browser
+TC_001,Registration,REQ-01,Register with valid data,Not logged in,"1. Open Account > Register
+2. Fill all fields
+3. Tick Privacy Policy
+4. Click Continue","Unique email, pwd Test@1234",Account created; success page shown,Congratulations! Your new account has been successfully created!,Run,,,Brave
+TC_002,Registration,REQ-01,Submit empty form,Register page open,Click Continue without input,-,Error shown for each mandatory field,Error shown for each mandatory field,Run,,,Chrome
+TC_003,Registration,REQ-01,First name 1 char (boundary),Register page open,"Fill form, first name 1 char",a,Accepted,Accepted,Run,,,Chrome
+TC_004,Registration,REQ-01,First name 32 chars (boundary),Register page open,"Fill form, first name 32 chars",32 x 'a',Accepted,Accepted,Run,,,Chrome
+TC_005,Registration,REQ-01,First name 33 chars (boundary),Register page open,"Fill form, first name 33 chars",33 x 'a',Validation error,Error ,Run,,,Chrome
+TC_006,Registration,REQ-01,Invalid email format,Register page open,Enter email without @,abc.com,Email validation error,Error,Run,,,Chrome
+TC_007,Registration,REQ-01,Duplicate email,Account exists,Register with already used email,Existing email,Error: email already registered,Error: email already registered,Run,,,Chrome
+TC_008,Registration,REQ-01,Password too short (3 chars),Register page open,Enter 3-char password,abc,Password length error,Password length error,Run,,,Chrome
+TC_009,Registration,REQ-01,Password and confirm mismatch,Register page open,Enter different confirm password,Test@1234 / Test@12,Confirmation error,,Not Run,,,
+TC_010,Registration,REQ-01,Privacy Policy not ticked,Register page open,"Fill valid data, leave box unticked, Continue",-,Error: must agree to Privacy Policy,Error: must agree to Privacy Policy,Run,,,Chrome
+TC_011,Login,REQ-02,Login with valid credentials,Account exists,"Open Login, enter email+pwd, click Login",Valid,Redirected to My Account,Redirected to My Account,Run,,,Brave
+TC_012,Login,REQ-02,Wrong password,Account exists,"Enter valid email, wrong pwd",Valid email / wrong pwd,Warning: no match for email/password,Warning: no match for email/password,Run,,,Brave
+TC_013,Login,REQ-02,Unregistered email,-,Enter unknown email,nouser@test.com,Warning shown; no login,,Not Run,,,Brave
+TC_014,Login,REQ-02,Empty fields,Login page open,Click Login with empty fields,-,Warning shown; no login,,Not Run,,,Brave
+TC_015,Login,REQ-02,Logout,Logged in,Click My Account > Logout,-,Logout confirmation; session ended,,Not Run,,,Brave
+TC_016,Login,REQ-02,Back button after logout,Logged out,Press browser Back,-,Account pages not accessible without login,,Not Run,,,Brave
+TC_017,Login,REQ-02,Forgotten password with registered email,Account exists,"Click Forgotten Password, enter email",Valid email,Confirmation message shown,,Not Run,,,Brave
+TC_018,Login,REQ-02,Forgotten password with unknown email,-,Submit unknown email,nouser@test.com,Error: email not found,,Not Run,,,Brave
+TC_019,Search,REQ-03,Search existing product,-,"Type product name in search, press Enter",iPhone,iPhone appears in results,,Not Run,,,Brave
+TC_020,Search,REQ-03,Search non-existing product,-,Search for gibberish,zzzxxx,'No product matches' message,,Not Run,,,Brave
+TC_021,Search,REQ-03,Search empty keyword,-,Click search with empty box,-,No crash; sensible result/message,,Not Run,,,Brave
+TC_022,Search,REQ-03,Case-insensitive search,-,Search lower and upper case,iphone / IPHONE,Same results,,Not Run,,,Brave
+TC_023,Search,REQ-03,Search with special characters,-,Search special chars,"<script>, %, '",No error/script execution; safe handling,,Not Run,,,Brave
+TC_024,Search,REQ-03,Sort by price low-high,Results listed,Select Sort By: Price (Low > High),-,Prices ascending,,Not Run,,,Brave
+TC_025,Search,REQ-03,Limit per page change,Results listed,Change Show to 25/50,-,Item count per page updates,,Not Run,,,Brave
+TC_026,Product,REQ-04,Product page details,-,Open any product,MacBook,"Name, price, image, description, Add to Cart visible",,Not Run,,,Brave
+TC_027,Product,REQ-04,Product image gallery,-,Click product image / thumbnails,-,Images open and navigate correctly,,Not Run,,,Brave
+TC_028,Product,REQ-04,Add to wishlist while logged out,Not logged in,Click heart icon,-,Prompt to login/register,,Not Run,,,Brave
+TC_029,Product,REQ-04,Product compare,-,"Add two products to compare, open Compare","iPhone, MacBook",Comparison table shows both,,Not Run,,,Brave
+TC_030,Product,REQ-04,Required option validation,-,"Open product with options, Add to Cart without selecting","Apple Cinema 30""",Required-option error shown,,Not Run,,,Brave
+TC_031,Cart,REQ-05,Add product to cart,-,"Open product, Add to Cart",iPhone,Success alert; cart count updates,,Not Run,,,Brave
+TC_032,Cart,REQ-05,Update quantity,Item in cart,"Open Cart, change qty to 2, update",qty 2,Total = 2 x unit price,,Not Run,,,Brave
+TC_033,Cart,REQ-05,Quantity zero,Item in cart,"Set qty 0, update",0,Item removed,,Not Run,,,Brave
+TC_034,Cart,REQ-05,Negative / non-numeric quantity,Item in cart,Enter -1 and 'abc',"-1, abc",Rejected or handled; no negative total,,Not Run,,,Brave
+TC_035,Cart,REQ-05,Remove item,Item in cart,Click remove,-,Item removed; totals recalculated,,Not Run,,,Brave
+TC_036,Cart,REQ-05,Price calculation incl. tax,Item in cart,"Compare Ex Tax, tax and total",MacBook,Total matches displayed tax rules,,Not Run,,,Brave
+TC_037,Cart,REQ-05,Cart persists after login,Item in cart as guest,Login,-,Cart items preserved,,Not Run,,,Brave
+TC_038,Cart,REQ-05,Invalid coupon,Item in cart,Apply invalid coupon,XXXX,Error: coupon invalid,,Not Run,,,Brave
+TC_039,Checkout,REQ-06,Guest checkout with valid data,Item in cart,Checkout > Guest > fill details > confirm,Valid address,Order flow reaches confirmation,,Not Run,,,Brave
+TC_040,Checkout,REQ-06,Checkout empty cart,Cart empty,Open checkout URL directly,-,Redirected/message: cart empty,,Not Run,,,Brave
+TC_041,Checkout,REQ-06,Mandatory address fields blank,Item in cart,Continue with blank address,-,Validation errors shown,,Not Run,,,Brave
+TC_042,Checkout,REQ-06,Terms and conditions not ticked,Item in cart,Proceed without agreeing,-,Warning: must agree to terms,,Not Run,,,Brave
+TC_043,Checkout,REQ-06,Shipping method selection,Item in cart,Select shipping method,-,Shipping cost added to total,,Not Run,,,Brave
+TC_044,Checkout,REQ-06,Registered user checkout,"Logged in, item in cart",Complete checkout,Saved address,Order placed; appears in Order History,,Not Run,,,Brave
+TC_045,Checkout,REQ-06,Order total accuracy,Item in cart,Verify subtotal+tax+shipping = total,-,Arithmetic correct,,Not Run,,,Brave
