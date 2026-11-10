@@ -1,5 +1,3 @@
-# opencart-manual-testing
-Manual testing project for OpenCart demo store
 # OpenCart Manual Testing Project
 
 Manual functional testing of the OpenCart demo store: https://demo.opencart.com/
@@ -10,7 +8,7 @@ Out of scope: admin panel, real payments, performance, security testing.
 
 ## Environment
 - Windows, Chrome and Brave (latest)
-- Test date: <your date>
+- Test date: 11/11/2026
 
 ## Contents
 - Test-Plan/Test-Plan.pdf: test plan
